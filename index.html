@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Decision Desk: Make Automation Demo | Yulia Knowles</title>
+<meta name="description" content="Make automation demo by Yulia Knowles, Executive Personal Assistant: a live Make scenario with a router that sorts bills, expenses, timesheets and contracts so only real decisions reach the principal.">
+<meta name="keywords" content="Make, Make.com, Make automation, Make router, workflow automation, Executive Personal Assistant, CEO support, family office">
+<meta property="og:title" content="The Decision Desk: Make Automation Demo">
+<meta property="og:description" content="A live Make scenario that decides what needs the principal and what doesn't.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root { --ivory: #FAF8F3; --paper: #FFFFFF; --ink: #1C1B19; --muted: #6B675F; --line: #E4DFD3; --gold: #9C7C3C; --soft: #F2EEE4; --green: #3F6B4A; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--ivory); color: var(--ink); font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; font-weight: 300; font-size: 17px; line-height: 1.7; }
+a { color: inherit; }
+.bar { border-bottom: 1px solid var(--line); background: var(--ivory); position: sticky; top: 0; z-index: 10; }
+.bar-inner { max-width: 1040px; margin: 0 auto; padding: 14px 24px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; }
+.bar a { text-decoration: none; color: var(--muted); }
+.bar a:hover { color: var(--ink); }
+.short { display: none; }
+.wrap { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
+.eyebrow { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin: 0 0 14px; }
+h1, h2, h3 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; margin: 0; }
+h1 { font-size: clamp(42px, 7vw, 68px); line-height: 1.05; letter-spacing: -0.01em; }
+h2 { font-size: clamp(30px, 4.5vw, 40px); line-height: 1.15; margin-bottom: 18px; }
+h3 { font-size: 22px; line-height: 1.25; margin-bottom: 8px; }
+.badge { display: inline-block; margin-top: 24px; padding: 7px 16px; border: 1px solid var(--gold); color: var(--gold); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 400; }
+.hero { padding: 80px 0 56px; border-bottom: 1px solid var(--line); }
+.hero p.lead { font-size: 20px; max-width: 660px; color: var(--muted); margin: 22px 0 32px; }
+.btn { display: inline-block; padding: 14px 28px; border: 1px solid var(--ink); text-decoration: none; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 400; transition: background .2s, color .2s; background: transparent; color: var(--ink); cursor: pointer; font-family: inherit; }
+.btn:hover { background: var(--ink); color: var(--ivory); }
+section { padding: 72px 0; border-bottom: 1px solid var(--line); }
+.intro { max-width: 680px; color: var(--muted); margin: 0 0 40px; }
+.note { font-size: 14px; color: var(--muted); border-left: 2px solid var(--gold); padding-left: 14px; }
+
+/* Demo */
+.try { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 48px; align-items: start; }
+.try ol { padding-left: 20px; margin: 0 0 20px; }
+.try li { margin-bottom: 10px; }
+.samples { margin-top: 28px; }
+.samples .lbl, .desk .lbl { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { border: 1px solid var(--line); background: var(--paper); padding: 8px 12px; font-size: 14px; cursor: pointer; font-family: inherit; color: var(--ink); font-weight: 300; }
+.chip:hover { border-color: var(--gold); }
+.desk { background: var(--paper); border: 1px solid var(--line); padding: 28px; }
+.types { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin-bottom: 22px; }
+.type { border: 1px solid var(--line); background: var(--ivory); padding: 12px 6px; text-align: center; cursor: pointer; font-size: 14px; font-family: inherit; color: var(--ink); font-weight: 300; }
+.type.on { background: var(--ink); color: var(--ivory); border-color: var(--ink); }
+.field { margin-bottom: 18px; }
+.field label { display: block; font-size: 14px; font-weight: 400; margin-bottom: 6px; }
+.field input { width: 100%; padding: 12px 14px; border: 1px solid var(--line); background: var(--ivory); font-family: inherit; font-size: 16px; color: var(--ink); }
+.field input:focus { outline: none; border-color: var(--gold); }
+.send { width: 100%; padding: 15px; background: var(--ink); color: var(--ivory); border: 0; font-family: inherit; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer; }
+.send:disabled { opacity: .6; cursor: default; }
+.result { margin-top: 22px; border-top: 1px solid var(--line); padding-top: 20px; min-height: 150px; }
+.result .wait { color: var(--muted); font-size: 15px; }
+.lane { display: inline-block; padding: 6px 12px; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 12px; }
+.lane.ceo { background: var(--ink); color: var(--ivory); }
+.lane.review { background: var(--gold); color: var(--paper); }
+.lane.handled { background: var(--green); color: var(--paper); }
+.result h3 { margin-bottom: 6px; }
+.result p { margin: 0 0 6px; font-size: 15px; }
+.result .meta { font-size: 13px; color: var(--muted); margin-top: 10px; }
+
+/* Rules */
+.rules { border-top: 1px solid var(--line); }
+.rule { display: grid; grid-template-columns: 160px minmax(0, 1fr) minmax(0, 1fr); gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--line); font-size: 15px; }
+.rule.head { font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); padding: 12px 0; }
+.rule .name { font-weight: 500; }
+.dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 8px; vertical-align: 1px; }
+.dot.ceo { background: var(--ink); } .dot.review { background: var(--gold); } .dot.handled { background: var(--green); }
+
+/* Scenario map */
+.map { display: grid; grid-template-columns: minmax(0, 0.8fr) 40px minmax(0, 0.8fr) 40px minmax(0, 1.4fr); align-items: center; margin-top: 8px; }
+.node { background: var(--paper); border: 1px solid var(--line); padding: 18px; text-align: center; }
+.node .k { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+.node strong { display: block; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 24px; font-weight: 500; }
+.node span { font-size: 13px; color: var(--muted); }
+.node.router { background: var(--ink); color: var(--ivory); border-color: var(--ink); }
+.node.router span { color: #CFC8B8; }
+.arrow { text-align: center; color: var(--gold); font-size: 22px; }
+.branches { display: grid; gap: 10px; }
+.branch { background: var(--paper); border: 1px solid var(--line); padding: 12px 16px; font-size: 14px; }
+.branch .f { font-size: 12px; color: var(--muted); }
+.branch strong { font-weight: 500; }
+.explain { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 40px; }
+.explain div { padding: 22px; border: 1px solid var(--line); background: var(--paper); }
+.explain strong { font-weight: 500; display: block; margin-bottom: 4px; }
+.explain span { font-size: 14px; color: var(--muted); }
+
+/* Board */
+.board { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.col { background: var(--soft); padding: 14px; min-height: 210px; }
+.col .ch { font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+.card { background: var(--paper); border: 1px solid var(--line); padding: 12px; font-size: 14px; margin-bottom: 10px; line-height: 1.5; }
+.card .t { font-weight: 500; }
+.card .s { font-size: 12px; color: var(--muted); }
+.card.new { border-left: 3px solid var(--gold); }
+
+/* Scenarios */
+.uses { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.use { background: var(--paper); border: 1px solid var(--line); padding: 26px 24px; }
+.use .who { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+.use p { margin: 0 0 14px; font-size: 15px; }
+.use .chain { font-size: 14px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 12px; }
+
+.compare { border-top: 1px solid var(--line); margin-top: 8px; }
+.cmp { display: grid; grid-template-columns: 180px minmax(0, 1fr) minmax(0, 1fr); gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 15px; }
+.cmp.head { font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); padding: 12px 0; }
+.cmp .name { font-weight: 500; }
+.design { max-width: 720px; color: var(--muted); margin-top: 32px; }
+footer { padding: 48px 0 64px; text-align: center; font-size: 14px; color: var(--muted); }
+footer a { color: var(--ink); }
+
+@media (max-width: 860px) {
+  .try, .explain, .uses { grid-template-columns: 1fr; }
+  .board { grid-template-columns: 1fr 1fr; }
+  .map { grid-template-columns: 1fr; gap: 10px; }
+  .map .arrow { transform: rotate(90deg); }
+  .rule, .cmp { grid-template-columns: 1fr; gap: 4px; }
+  .rule.head, .cmp.head { display: none; }
+  .hero { padding: 56px 0 44px; }
+  section { padding: 56px 0; }
+}
+@media (max-width: 520px) {
+  .long { display: none; } .short { display: inline; }
+  .types { grid-template-columns: 1fr 1fr; }
+  .board { grid-template-columns: 1fr; }
+  .col { min-height: 0; }
+  .desk { padding: 20px; }
+}
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="bar-inner">
+    <a href="https://yuliaknowles.com">&larr; <span class="long">Back to Yulia's website</span><span class="short">Back</span></a>
+    <span style="color:var(--muted)">Make &middot; Live demo</span>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Portfolio project &middot; Make automation</p>
+    <h1>The Decision Desk</h1>
+    <span class="badge">Built with Make</span>
+    <p class="lead">A live Make scenario for a CEO's office. Bills, expenses, timesheets and contracts are sorted the moment they arrive: real decisions go to the principal, routine items are handled, and every item is on record. Try it yourself.</p>
+    <a class="btn" href="#try">Try the demo</a>
+  </div>
+</header>
+
+<section id="try">
+  <div class="wrap try">
+    <div>
+      <p class="eyebrow">Try it</p>
+      <h2>Send an item to the desk</h2>
+      <ol>
+        <li>Choose what comes in: a bill, an expense, a staff timesheet or a contract.</li>
+        <li>Enter the amount or the hours and press <em>Send to Make</em>.</li>
+        <li>Make sorts it and the answer appears within seconds: where it lands and why.</li>
+      </ol>
+      <p class="note">Each item really goes to my Make scenario and back. Nothing is emailed and no personal details are collected.</p>
+      <div class="samples">
+        <div class="lbl">Or try a sample</div>
+        <div class="chips">
+          <button class="chip" data-type="bill" data-desc="Pool heater repair, Fort Lauderdale residence" data-val="3200">$3,200 pool heater repair</button>
+          <button class="chip" data-type="timesheet" data-desc="Driver, week of November 16" data-val="52">Driver timesheet, 52 hours</button>
+          <button class="chip" data-type="expense" data-desc="Client dinner, New York" data-val="240">$240 client dinner</button>
+          <button class="chip" data-type="contract" data-desc="Event venue agreement, Barcelona" data-val="18000">Barcelona venue contract</button>
+        </div>
+      </div>
+    </div>
+    <div class="desk">
+      <div class="lbl">New item</div>
+      <div class="types" role="group" aria-label="Item type">
+        <button class="type on" data-type="bill">Bill</button>
+        <button class="type" data-type="expense">Expense</button>
+        <button class="type" data-type="timesheet">Timesheet</button>
+        <button class="type" data-type="contract">Contract</button>
+      </div>
+      <div class="field">
+        <label for="desc">Description</label>
+        <input id="desc" type="text" value="Landscaping, November service">
+      </div>
+      <div class="field">
+        <label for="val" id="valLabel">Amount (USD)</label>
+        <input id="val" type="number" min="0" step="1" value="850" inputmode="decimal">
+      </div>
+      <button class="send" id="send">Send to Make</button>
+      <div class="result" id="result" aria-live="polite">
+        <p class="wait">The decision appears here.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">The rules</p>
+    <h2>What reaches the principal, and what doesn't</h2>
+    <p class="intro">I agree the thresholds with the principal once. After that, Make applies them to every item, every time, and the principal only sees what truly needs them.</p>
+    <div class="rules">
+      <div class="rule head"><span>Item</span><span>Rule</span><span>Where it lands</span></div>
+      <div class="rule"><span class="name">Bill</span><span>Over $2,500</span><span><i class="dot ceo"></i>Needs CEO Decision</span></div>
+      <div class="rule"><span class="name">Bill</span><span>Up to $2,500</span><span><i class="dot handled"></i>Handled by Yulia: scheduled for payment</span></div>
+      <div class="rule"><span class="name">Expense</span><span>Over the $1,000 policy limit</span><span><i class="dot ceo"></i>Needs CEO Decision</span></div>
+      <div class="rule"><span class="name">Expense</span><span>Within policy</span><span><i class="dot handled"></i>Handled by Yulia: approved and logged</span></div>
+      <div class="rule"><span class="name">Timesheet</span><span>More than 40 hours</span><span><i class="dot review"></i>Flagged for review before payroll</span></div>
+      <div class="rule"><span class="name">Timesheet</span><span>40 hours or less</span><span><i class="dot handled"></i>Handled by Yulia: approved for payroll</span></div>
+      <div class="rule"><span class="name">Contract</span><span>Any amount</span><span><i class="dot ceo"></i>Needs CEO Decision: the principal signs</span></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Behind the scenes</p>
+    <h2>The scenario in Make</h2>
+    <p class="intro">In Make, an automation is called a scenario and each step is a module. This one has a single entry point and a router that sends each item down the right branch.</p>
+    <div class="map">
+      <div class="node"><div class="k">Module 1</div><strong>Webhook</strong><span>Receives the item from this page</span></div>
+      <div class="arrow">&rarr;</div>
+      <div class="node router"><div class="k">Module 2</div><strong>Router</strong><span>Checks the type and the amount or hours</span></div>
+      <div class="arrow">&rarr;</div>
+      <div class="branches">
+        <div class="branch"><i class="dot ceo"></i><strong>Needs the principal</strong><div class="f">Contract, or bill over $2,500, or expense over $1,000</div></div>
+        <div class="branch"><i class="dot review"></i><strong>Overtime check</strong><div class="f">Timesheet over 40 hours</div></div>
+        <div class="branch"><i class="dot handled"></i><strong>Routine</strong><div class="f">Everything within the limits</div></div>
+      </div>
+    </div>
+    <div class="explain">
+      <div><strong>One entry point</strong><span>Every item arrives the same way, whether it comes from a form, an email or an expense app.</span></div>
+      <div><strong>Rules, not guesswork</strong><span>Each branch has a filter. An item only goes down the branch whose rule it matches.</span></div>
+      <div><strong>An answer every time</strong><span>Each branch replies with where the item landed, so nothing is left in limbo.</span></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Where it lands</p>
+    <h2>Straight into the CEO Command Center</h2>
+    <p class="intro">In a live office, each branch adds a card to the right column of my Asana board, the CEO Command Center. The principal opens one column and sees only what needs them.</p>
+    <div class="board">
+      <div class="col"><div class="ch">Needs CEO Decision</div>
+        <div class="card new"><div class="t">Pool heater repair &middot; $3,200</div><div class="s">Bill over $2,500 &middot; approve or decline</div></div>
+        <div class="card"><div class="t">Barcelona venue agreement</div><div class="s">Contract &middot; signature needed</div></div>
+      </div>
+      <div class="col"><div class="ch">Flagged for review</div>
+        <div class="card new"><div class="t">Driver timesheet &middot; 52 hours</div><div class="s">Check against the schedule before payroll</div></div>
+      </div>
+      <div class="col"><div class="ch">In progress</div>
+        <div class="card"><div class="t">Landscaping &middot; $850</div><div class="s">Scheduled for payment Friday</div></div>
+      </div>
+      <div class="col"><div class="ch">Done this week</div>
+        <div class="card"><div class="t">Client dinner &middot; $240</div><div class="s">Within policy &middot; logged</div></div>
+        <div class="card"><div class="t">House staff timesheets</div><div class="s">Approved for payroll</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Founder and principal support</p>
+    <h2>Other scenarios I would build with Make</h2>
+    <p class="intro">The same idea, one entry point, clear rules and a decision on every item, works across a CEO's office and a family office.</p>
+    <div class="uses">
+      <div class="use"><div class="who">Every Friday</div><h3>Monday Brief, drafted</h3><p>Make collects open decisions, next week's calendar and anything overdue, and drafts the Monday Brief for my review.</p><div class="chain">Asana &middot; Google Calendar &middot; Gmail</div></div>
+      <div class="use"><div class="who">Meetings</div><h3>Prep and follow-up</h3><p>A day before an external meeting, a prep card appears. Afterward, action items become cards with an owner and a due date.</p><div class="chain">Google Calendar &middot; Zoom &middot; Asana</div></div>
+      <div class="use"><div class="who">Inbox</div><h3>VIP triage</h3><p>Emails from the board, investors or family go to Needs CEO Decision and alert me. Invoices go to this desk; scheduling goes to the calendar queue.</p><div class="chain">Gmail &middot; Asana &middot; Slack</div></div>
+      <div class="use"><div class="who">Family office</div><h3>Renewals radar</h3><p>Insurance policies, vendor contracts, certificates of insurance and passports trigger reminders at 60, 30 and 7 days.</p><div class="chain">Google Sheets &middot; Asana &middot; Gmail</div></div>
+      <div class="use"><div class="who">Properties</div><h3>Pre-arrival by destination</h3><p>When a trip is booked, the router sends the pre-arrival checklist to the right property manager, in Florida, New York or Barcelona.</p><div class="chain">Gmail &middot; Asana &middot; Text message</div></div>
+      <div class="use"><div class="who">Family</div><h3>Family support requests</h3><p>Requests from family members are sorted by type and amount; anything that needs the principal's approval goes straight to their column.</p><div class="chain">Forms &middot; Asana &middot; Gmail</div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">How it's built</p>
+    <h2>Tools and design choices</h2>
+    <div class="compare">
+      <div class="cmp head"><span></span><span>Zapier</span><span>Make</span></div>
+      <div class="cmp"><span class="name">Best for</span><span>Simple "when this happens, do that" connections</span><span>Workflows with decisions, branches and rules</span></div>
+      <div class="cmp"><span class="name">How it's built</span><span>A list of steps</span><span>A visual map with routers and filters</span></div>
+      <div class="cmp"><span class="name">My demo</span><span><a href="https://yuliaknowles-sys.github.io/zapier-automation/" target="_blank" rel="noopener">Every Request Answered ↗</a></span><span>The Decision Desk (this page)</span></div>
+    </div>
+    <p class="design">Here the scenario answers straight back to this page so you can see each decision instantly. In a live office the same branches would add the card to Asana and send the principal a short summary. The scenario runs on Make's free plan, so the demo stays live.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>A portfolio demonstration by Yulia Knowles, Executive Personal Assistant.</p>
+    <p><a href="https://yuliaknowles.com">&larr; Back to Yulia's website</a></p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var HOOK = 'https://hook.us2.make.com/nlcbqku5wwivo7t9nn7rmurcwmq43hdh';
+  var type = 'bill';
+  var defaults = {
+    bill: ['Landscaping, November service', '850'],
+    expense: ['Client dinner, New York', '240'],
+    timesheet: ['Driver, week of November 16', '52'],
+    contract: ['Event venue agreement, Barcelona', '18000']
+  };
+  var typeBtns = document.querySelectorAll('.type');
+  var desc = document.getElementById('desc');
+  var val = document.getElementById('val');
+  var valLabel = document.getElementById('valLabel');
+  var send = document.getElementById('send');
+  var result = document.getElementById('result');
+
+  function setType(t, d, v) {
+    type = t;
+    for (var i = 0; i < typeBtns.length; i++) {
+      typeBtns[i].classList.toggle('on', typeBtns[i].getAttribute('data-type') === t);
+    }
+    valLabel.textContent = t === 'timesheet' ? 'Hours this week' : (t === 'contract' ? 'Contract value (USD)' : 'Amount (USD)');
+    desc.value = d || defaults[t][0];
+    val.value = v || defaults[t][1];
+  }
+  for (var i = 0; i < typeBtns.length; i++) {
+    typeBtns[i].addEventListener('click', function () { setType(this.getAttribute('data-type')); });
+  }
+  var chips = document.querySelectorAll('.chip');
+  for (var j = 0; j < chips.length; j++) {
+    chips[j].addEventListener('click', function () {
+      setType(this.getAttribute('data-type'), this.getAttribute('data-desc'), this.getAttribute('data-val'));
+      document.querySelector('.desk').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      go();
+    });
+  }
+
+  function money(n) { return '$' + Number(n).toLocaleString('en-US'); }
+  function reason(t, n) {
+    if (t === 'contract') return 'Contracts are signed by the principal.';
+    if (t === 'bill') return n > 2500 ? 'Bills over $2,500 need the principal\'s approval.' : 'Within the $2,500 limit, so I schedule the payment.';
+    if (t === 'expense') return n > 1000 ? 'Over the $1,000 expense policy, so the principal decides.' : 'Within the expense policy, so it is approved and logged.';
+    return n > 40 ? 'More than 40 hours, so I check it against the schedule before payroll.' : '40 hours or less, so it is approved for payroll.';
+  }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+
+  function go() {
+    var n = parseFloat(val.value);
+    if (isNaN(n) || n < 0) { result.innerHTML = '<p class="wait">Please enter a number.</p>'; return; }
+    var body = new URLSearchParams({
+      type: type,
+      description: desc.value.slice(0, 120),
+      amount: type === 'timesheet' ? '' : String(n),
+      hours: type === 'timesheet' ? String(n) : ''
+    });
+    send.disabled = true;
+    result.innerHTML = '<p class="wait">Sending to Make&hellip;</p>';
+    var t0 = Date.now();
+    fetch(HOOK, { method: 'POST', body: body })
+      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(function (d) {
+        var secs = ((Date.now() - t0) / 1000).toFixed(1);
+        var what = type === 'timesheet' ? n + ' hours' : money(n);
+        result.innerHTML =
+          '<span class="lane ' + esc(d.route) + '">' + esc(d.column) + '</span>' +
+          '<h3>' + esc(desc.value || defaults[type][0]) + ' &middot; ' + esc(what) + '</h3>' +
+          '<p>' + esc(reason(type, n)) + '</p>' +
+          '<p><strong style="font-weight:500">Next:</strong> ' + esc(d.action) + '.</p>' +
+          '<p class="meta">Sorted by Make in ' + secs + ' seconds</p>';
+      })
+      .catch(function () {
+        result.innerHTML = '<p class="wait">Make did not answer this time. Please try again in a moment.</p>';
+      })
+      .then(function () { send.disabled = false; });
+  }
+  send.addEventListener('click', go);
+})();
+</script>
+</body>
+</html>
