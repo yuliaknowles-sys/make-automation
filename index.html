@@ -343,9 +343,9 @@ footer a { color: var(--ink); }
   function money(n) { return '$' + Number(n).toLocaleString('en-US'); }
   function reason(t, n) {
     if (t === 'contract') return 'Contracts are signed by the principal.';
-    if (t === 'bill') return n > 2500 ? 'Bills over $2,500 need the principal\'s approval.' : 'Within the $2,500 limit, so I schedule the payment.';
-    if (t === 'expense') return n > 1000 ? 'Over the $1,000 expense policy, so the principal decides.' : 'Within the expense policy, so it is approved and logged.';
-    return n > 40 ? 'More than 40 hours, so I check it against the schedule before payroll.' : '40 hours or less, so it is approved for payroll.';
+    if (t === 'bill') return n > 2500 ? 'Bills over $2,500 need the principal\'s approval.' : 'Within the $2,500 limit.';
+    if (t === 'expense') return n > 1000 ? 'Over the $1,000 expense policy, so the principal decides.' : 'Within the $1,000 expense policy.';
+    return n > 40 ? 'More than 40 hours, so it needs a check before anyone approves it.' : '40 hours or less, within the normal schedule.';
   }
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
 
